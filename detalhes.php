@@ -13,6 +13,7 @@
 </head>
 <body>
     <?php
+        include_once "topo.php";
         $cod = $_GET['cod'] ?? 0;
         $busca = $banco->query("SELECT * FROM jogos WHERE cod='$cod'");    
     ?>
@@ -48,5 +49,6 @@
         </table> 
         <a href="index.php"><img src="img/icones/icoback.png" alt=""></a>  
     </div>
+    <?php include_once "rodape.php";?>
 </body>
 </html>
