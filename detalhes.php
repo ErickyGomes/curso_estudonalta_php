@@ -14,12 +14,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+
+    <div id="corpo">
     <?php
         include_once "topo.php";
         $cod = $_GET['cod'] ?? 0;
         $busca = $banco->query("SELECT * FROM jogos WHERE cod='$cod'");    
     ?>
-    <div id="corpo">
         <h1>Detalhes do Jogo</h1> 
         
         <table class='detalhes'>
@@ -36,7 +37,19 @@
                         <td><h2><?php echo $reg->nome?></h2><p><?php echo "Nota: ". number_format($reg->nota,1)." / 10.0"?></p></td>
                     </tr>
                     <tr><td><?php echo $reg->descricao?></td></tr>
-                    <tr><td>Adm</td></tr>
+                    <tr>
+                        <td>
+                            <?php
+                            if (is_admin()) {
+                                echo "<i class='material-icons'>add_circle</i>";
+                                echo "<i class='material-icons'>edit</i>";
+                                echo "<i class='material-icons'>delete</i>";
+                            }elseif(is_editor()){
+                                echo "<td><i class='material-icons'>edit</i>";
+                            }
+                            ?>
+                        </td>
+                    </tr>
                 <?php
                 }else{
                     echo "<tr><td>Nenhum dado encontrado!</td></tr>";
